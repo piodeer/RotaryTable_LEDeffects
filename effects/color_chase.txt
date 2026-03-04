@@ -1,0 +1,4 @@
+# Color Chase
+wipe 255 0 0
+wipe 255 127 0
+wipe 255 255 0
