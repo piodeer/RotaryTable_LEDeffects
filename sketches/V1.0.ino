@@ -10,8 +10,8 @@
 /*************************************************************
  *                      WIFI CONFIG
  *************************************************************/
-const char* ssid     = "UPC68C22D4_1";
-const char* password = "20*Silverfern02";
+const char* ssid     = "YOUR SSID";
+const char* password = "YOUR PASSWORD";
 
 /*************************************************************
  *                      LED CONFIG
@@ -760,3 +760,4 @@ void loop(){
     case 2: runStage();     break;
   }
 }
+
