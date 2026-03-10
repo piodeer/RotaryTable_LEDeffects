@@ -586,7 +586,7 @@ window.addEventListener("load", ()=>{
   const localVersion = meta ? (meta.getAttribute("content") || "").trim() : "";
   if (vi && localVersion) {
     vi.textContent = "Running firmware version " + localVersion + " … checking for updates …";
-    fetch("https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/effects/version.txt")
+    fetch("https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/version.txt")
       .then(r => r.text())
       .then(txt => {
         const remote = (txt || "").trim();
@@ -760,5 +760,6 @@ void loop(){
     case 2: runStage();     break;
   }
 }
+
 
 
