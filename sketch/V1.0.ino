@@ -602,7 +602,7 @@ window.addEventListener("load", ()=>{
         } else {
           vi.innerHTML = 
             "Installed version " + localVersion + " - newest is " + remote + ". " +
-            '<a href="https://github.com/piodeer/RotaryTable_LEDeffects/tree/main/sketches" ' +
+            '<a href="https://github.com/piodeer/RotaryTable_LEDeffects/tree/main/sketch" ' +
             'style="color:#007aff;text-decoration:none;" target="_blank" rel="noopener">Get the newest version here</a>.';
         }
       })
@@ -760,4 +760,5 @@ void loop(){
     case 2: runStage();     break;
   }
 }
+
 
