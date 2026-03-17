@@ -381,7 +381,7 @@
  <!-- COLOR -->
  <div class="card" id="colorCard" ondblclick="openRgbModal()">
    <h3>LED Color</h3>
-   <small style="color:#8e8e93;">Doppelklick: RGB-Werte eingeben</small>
+   <small style="color:#8e8e93;">Double-click: Enter RGB values</small>
    <br>
    Hue
    <input id="hue" class="hue-slider" type="range" min="0" max="255" onchange="setHue(this.value)">
