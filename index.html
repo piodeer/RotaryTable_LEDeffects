@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotary Table Assembly Guide</title>
+
+    <style>
+        /* --- BASE STYLES --- */
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        :root{
+            --vh: 1vh;
+            --header-h: 60px;
+            --cta-h: 56px;
+            --footer-h: 64px;
+            --extra-bottom: -32px; /* fine‑tuning: reduces bottom spacer a bit */
+        }
+        html, body {
+            height: 100%;
+        }
+        body { 
+            margin: 0; 
+            background: #f2f2f7; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            overflow: hidden;
+            color: #1c1c1e; 
+        }
+        
+        /* --- HEADER --- */
+        .header { 
+            position: fixed; 
+            top: 0; 
+            width: 100%; 
+            padding: 12px 18px; 
+            font-weight: 600; 
+            background: rgba(255, 255, 255, 0.8); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px); 
+            z-index: 10; 
+            border-bottom: 0.5px solid rgba(0,0,0,0.1); 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .logo-wrap{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-wrap img{
+            height: 28px;
+            width: 28px;
+            border-radius: 8px;
+            filter: invert(1);
+        }
+        .header-title{
+            font-size: 15px;
+            letter-spacing: 0.2px;
+        }
+
+        /* --- HORIZONTAL SCROLLING --- */
+        .steps { 
+            display: flex; 
+            height: calc(var(--vh) * 100);
+            overflow-x: auto; 
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory; 
+            scroll-behavior: smooth; 
+            scrollbar-width: none; 
+            align-items: stretch;
+        }
+        @supports (height: 100dvh) {
+            .steps { height: 100dvh; }
+        }
+        .steps::-webkit-scrollbar { display: none; }
+
+        /* --- INDIVIDUAL STEP --- */
+        .step { 
+            flex: 0 0 100%; 
+            scroll-snap-align: start; 
+            height: 100%;
+            min-height: 0;
+            padding: 0;
+            overflow: hidden;
+            display: block;
+        }
+        @supports (height: 100dvh) {
+            .step { height: 100dvh; }
+        }
+        .step-scroll{
+            height: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
+            touch-action: pan-y pinch-zoom;
+            padding: calc(var(--header-h) + 14px) 18px 16px 18px;
+            display: flex;
+            justify-content: center;
+        }
+        .bottom-spacer{
+            height: calc(var(--cta-h) + var(--footer-h) + var(--extra-bottom) + 18px + env(safe-area-inset-bottom, 0px));
+        }
+        .step-content { max-width: 500px; width: 100%; }
+
+        /* --- BLOCKS --- */
+        .block { background: white; border-radius: 24px; padding: 22px; margin-bottom: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .title { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 10px; }
+        .hero-img img, .video video { width: 100%; border-radius: 20px; display: block; }
+        .qr-print-only{
+            display: none;
+        }
+        .text { font-size: 16px; line-height: 1.5; color: #6e6e73; }
+        
+        /* --- UI ELEMENTS --- */
+        .nav-guide { display: flex; justify-content: space-around; margin-top: 20px; padding: 15px; background: #f2f2f7; border-radius: 18px; font-size: 13px; font-weight: 500; }
+        .print-btn {
+            position: fixed; top: 15px; right: 15px; z-index: 20;
+            background: #007aff; color: white; border: none;
+            padding: 8px 16px; border-radius: 12px; font-size: 13px; font-weight: 600;
+            cursor: pointer; box-shadow: 0 4px 10px rgba(0,122,255,0.3);
+        }
+
+        .icons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .icon { background: #f2f2f7; border-radius: 12px; padding: 12px; font-size: 14px; font-weight: 500; text-align: center; }
+        .list a{
+            color: #34c759;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        /* Inventory Bilder */
+        .list ul{
+            list-style: none;
+            padding: 0;
+        }
+
+        .list li{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0;
+        }
+
+        .list ul.with-price li{
+            display: grid;
+            grid-template-columns: 60px 1fr 120px;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 0;
+        }
+        .list ul.with-price li.no-img{
+            grid-template-columns: 1fr 120px;
+        }
+
+        .list-text{
+            min-width: 0;
+            font-size: 14px;
+        }
+        .price-pill{
+            justify-self: end;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 0.2px;
+            color: #1c1c1e;
+            background: rgba(52, 199, 89, 0.14);
+            border: 1px solid rgba(52, 199, 89, 0.28);
+            white-space: nowrap;
+        }
+        .price-pill.muted{
+            color: #8e8e93;
+            background: rgba(142, 142, 147, 0.12);
+            border: 1px solid rgba(142, 142, 147, 0.22);
+        }
+        .cost-summary{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .cost-summary .total{
+            font-weight: 900;
+            font-size: 18px;
+            letter-spacing: -0.2px;
+        }
+        .cost-summary .meta{
+            color: #6e6e73;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .list img{
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            background: #eee;
+            cursor: zoom-in;
+        }   
+
+        /* --- SUB-STEPS / TILES --- */
+        .substep{
+            position: relative;
+            padding-top: 56px; /* reserve space so badge never overlaps content */
+        }
+        .substep-badge{
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            background: rgba(52, 199, 89, 0.95);
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 13px;
+            letter-spacing: 0.2px;
+            box-shadow: 0 10px 26px rgba(52,199,89,0.22);
+            border: 1px solid rgba(255,255,255,0.22);
+            z-index: 2;
+        }
+
+        .tile{
+            display: block; /* always stack: media then text */
+        }
+        .tile-media{
+            margin-bottom: 10px;
+        }
+        .tile-text{
+            min-width: 0;
+            padding-top: 0;
+        }
+        .tile .tile-text .text{
+            color: #6e6e73;
+        }
+        @media (max-width: 520px){
+            .tile-media{
+                margin-bottom: 12px;
+            }
+        }
+
+        /* --- LIGHTBOX --- */
+        .lightbox{
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.82);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+            z-index: 9999;
+        }
+        .lightbox.open{ display: flex; }
+        .lightbox-inner{
+            max-width: min(1100px, 96vw);
+            max-height: 92vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox img{
+            max-width: 100%;
+            max-height: 92vh;
+            width: auto;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 18px 60px rgba(0,0,0,0.45);
+            background: #111;
+        }
+        .hero-img img{
+            cursor: zoom-in;
+        }
+        @media print{
+            .lightbox{ display: none !important; }
+        }
+
+        /* --- FOOTER UI --- */
+        .footer-ui { position: fixed; bottom: 0; width: 100%; padding-bottom: 52px; background: linear-gradient(to top, #f2f2f7 80%, transparent); pointer-events: none; z-index: 10; }
+        .progress { display: flex; justify-content: center; gap: 8px; margin-bottom: 12px; }
+        .dot { width: 7px; height: 7px; border-radius: 50%; background: #d1d1d6; transition: all 0.4s ease; }
+        .dot.active { background: #007aff; width: 18px; border-radius: 4px; }
+        .swipe-hint { text-align: center; font-size: 11px; font-weight: 600; color: #8e8e93; text-transform: uppercase; letter-spacing: 1px; }
+
+        .cta-bar {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px)) 12px;
+            z-index: 20;
+            pointer-events: auto;
+            touch-action: manipulation;
+        }
+        .nav-btn{
+            border: none;
+            background: rgba(52, 199, 89, 0.95);
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: 0.1px;
+            font-size: 13px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 10px 26px rgba(52,199,89,0.25);
+            border: 1px solid rgba(255,255,255,0.18);
+        }
+        .nav-btn.secondary{
+            background: rgba(44, 44, 46, 0.86);
+            box-shadow: 0 10px 26px rgba(0,0,0,0.22);
+        }
+        .nav-btn:active { transform: translateY(1px); }
+        .nav-btn[disabled]{
+            opacity: 0.45;
+            cursor: default;
+            transform: none;
+        }
+        .cta-inner{
+            max-width: 540px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* --- PRINT / PDF STYLES --- */
+        @media print {
+            @page { margin: 1cm; }
+            body { overflow: visible; background: white !important; }
+            .steps { display: block; height: auto; overflow: visible; }
+            .step { 
+                display: flex !important; 
+                flex-direction: column;
+                align-items: center; /* Centering content for PDF */
+                text-align: left;
+                break-after: page;
+                page-break-after: always;
+                padding: 24px 0 !important; 
+                height: auto; 
+            }
+            .step:last-child{
+                break-after: auto;
+                page-break-after: auto;
+            }
+            .step-scroll{ height: auto !important; overflow: visible !important; padding: 0 !important; display: block !important; }
+            .bottom-spacer{ display: none !important; }
+
+            .step-content { max-width: 520px; margin: 0 auto; }
+            .header, .footer-ui, .cta-bar, .print-btn, .swipe-hint, .nav-guide { display: none !important; }
+
+            .block {
+                box-shadow: none;
+                border: 1px solid #eee;
+                break-inside: avoid;
+                border-radius: 16px;
+                padding: 14px;
+                margin-bottom: 10px;
+            }
+            .title { font-size: 20px; margin-bottom: 6px; }
+            .text { font-size: 13px; line-height: 1.45; }
+            .hero-img img, .video video { border-radius: 14px; }
+            .video video{ display: none !important; }
+            .qr-print-only{
+                display: block;
+                text-align: center;
+            }
+            .qr-print-only img{
+                width: 120px;
+                height: 120px;
+                margin: 8px auto 0;
+                display: block;
+            }
+            .list ul { width: 100%; margin: 0; padding: 0; }
+            /* two-column compact "table" nur für Preis-Tabelle */
+            .list ul.with-price{
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px 12px;
+            }
+            .list ul.with-price li{
+                display: grid;
+                grid-template-columns: 48px 1fr 90px;
+                gap: 6px;
+                align-items: center;
+                padding: 4px 8px;
+                border: 1px solid #eee;
+                border-radius: 10px;
+            }
+            .list ul.with-price li.no-img{
+                grid-template-columns: 1fr 90px;
+            }
+            .list ul.with-price img{
+                width: 48px;
+                height: 48px;
+                border-radius: 8px;
+                background: #f2f2f7;
+            }
+            .list ul.with-price .list-text{
+                font-size: 11px;
+            }
+            .list ul.with-price .price-pill{
+                padding: 4px 8px;
+                border-radius: 999px;
+                font-size: 10px;
+                border: 1px solid #d8f3df;
+                background: #ecfbf0;
+            }
+            .icons { display: flex; justify-content: center; gap: 12px; }
+            .icon { padding: 10px; font-size: 12px; border-radius: 10px; }
+
+            .substep-badge{
+                box-shadow: none;
+                border: 1px solid #2bb34f;
+                width: 34px;
+                height: 34px;
+                font-size: 12px;
+                top: 10px;
+                left: 10px;
+            }
+            .substep{
+                padding-top: 44px; /* tighter for PDF */
+            }
+            .tile{
+                display: block;
+            }
+            .tile-media{
+                margin-bottom: 10px;
+            }
+        }
+
+        /* DARK MODE */
+        @media (prefers-color-scheme: dark) {
+            body { background: #000; color: #fff; }
+            .header { background: rgba(28, 28, 30, 0.8); border-bottom: 0.5px solid #333; }
+            .block { background: #1c1c1e; }
+            .nav-guide, .icon { background: #2c2c2e; }
+            .footer-ui { background: linear-gradient(to top, #000 80%, transparent); }
+            .nav-btn { box-shadow: 0 10px 26px rgba(52,199,89,0.18); border: 1px solid rgba(255,255,255,0.12); }
+            .nav-btn.secondary{ background: rgba(58,58,60,0.76); box-shadow: 0 10px 26px rgba(0,0,0,0.30); }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="print-btn" onclick="window.print()">Save as PDF</button>
+    <div class="header">
+        <div class="logo-wrap" aria-hidden="true">
+            <img src="https://raw.githubusercontent.com/piodeer/LinkTree/main/media/logo.png" alt="">
+        </div>
+        <div class="header-title" id="main-title">Loading Guide...</div>
+    </div>
+
+    <div class="steps" id="steps-container">
+        </div>
+
+    <div class="footer-ui">
+        <div class="progress" id="progress-dots"></div>
+    </div>
+
+    <div class="cta-bar" aria-label="Next step">
+        <div class="cta-inner">
+            <button class="nav-btn secondary" id="prev-btn" type="button">
+                <span aria-hidden="true">←</span>
+                <span>Previous</span>
+            </button>
+            <button class="nav-btn" id="next-btn" type="button">
+                <span id="next-btn-label">Next step</span>
+                <span aria-hidden="true">→</span>
+            </button>
+        </div>        
+    </div>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+        <div class="lightbox-inner">
+            <img id="lightbox-img" alt="">
+        </div>
+    </div>
+
+    <script>
+        const config = {
+            title: "Rotating Table Assembly",
+steps: [
+{
+    isHome: true,
+    title: "Welcome",
+    image: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/themeimage.jpg",
+    text: "This guide will walk you step-by-step through the assembly of your Rotary Table. Follow each step carefully to ensure smooth operation and the best visual results.",
+    guide: true
+},
+
+{
+    title: "Step 1: Check Inventory",
+    sections: [
+        { type: "title", text: "Step 1: Check Inventory" },
+        { type: "text", text: "Unbox all parts and verify that everything listed below is included and undamaged." },
+        {
+            type: "list",
+            items: [
+                { text: "Motor and Driver (ULN2003)", url: "https://aliexpress.com/item/1005010023356777.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/motoranddriver.jpg", price: 2.6 },
+                { text: "Arduino D1 Mini", url: "https://aliexpress.com/item/1005009890033383.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/d1mini.jpg", price: 2.85 },
+                { text: "PCB", url: "https://aliexpress.com/item/1005009890033383.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/PCB.jpg", price: 12 },
+                { text: "LED WS2811 (5V, 720 LEDs/m)", url: "https://aliexpress.com/item/1005006781377950.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/led.jpg", price: 6.3 },
+                { text: "DC-Mount 5,5 x 2,1 mm (Type D)", url: "https://aliexpress.com/item/1005003324016159.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/dcmount.jpg", price: 2.98 },
+                { text: "Power Supply 5V 3A", url: "https://aliexpress.com/item/1005004121728138.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/powersupply.jpg", price: 3.39 },
+                { text: "Magnetic Connectorcable", url: "https://de.aliexpress.com/item/1005010205715413.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/magnetplug.jpg", price: 2.56 },
+                { text: "Latching Switch (3-6V)", url: "https://aliexpress.com/item/1005002970022858.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/button.jpg", price: 1.83 },
+                { text: "Dupont Connector Cables", url: "https://aliexpress.com/item/1005004647016228.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/dupont.jpg", price: 1.08 },
+                { text: "Rubber Feet (20x15x8mm) - can also be printed in TPU", url: "https://de.aliexpress.com/item/1005004654295448.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/rubberfeet.jpg", price: 2.03 },
+                { text: "Heat Inserts (M3x6mm)", url: "https://aliexpress.com/item/1005006838108683.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/heatinserts.jpg", price: 3.43 },
+                { text: "Steel Ball Plungers (4mm x 5)", url: "https://aliexpress.com/item/32959001335.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/steelballplungers.jpg", price: 1.93 },
+                { text: "Bearring (6908ZZ)", url: "https://aliexpress.com/item/33001063670.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/bearring.jpg", price: 4.75 },
+                { text: "Pan head screws (M3x8mm)", url: "https://aliexpress.com/item/32969042589.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/panheadscrews.jpg", price: 1.4 },
+                { text: "Capacitor 35V 1000uF", url: "https://aliexpress.com/item/1005011631970768.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/capacitor.jpg", price: 1.95},
+                { text: "Resistor 330Ω", url: "https://aliexpress.com/item/1005010228694988.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/resistor.jpg", price: 3.21},
+                { text: "2.54mm Pin Headers", url: "https://aliexpress.com/item/1005007528068254.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/pinheader.jpg", price: 1.56},
+                { text: "Mounting Screws (M4x12)", url: "https://aliexpress.com/item/1005008818351381.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/cylinderheadscrew.jpg", price: 2.32},
+                { text: "Matching Nuts (M4) / Inserts", url: "https://aliexpress.com/item/1005007593861199.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/nut.jpg", price: 1.43},
+            ]
+        },
+        { type: "title", text: "Tools" },
+        { type: "list", items: ["Allen Key", "Soldering Iron", "Pliers"] },
+        { type: "costSummary" }
+    ]
+},
+
+{
+    title: "Step 2: Print all Parts",
+    sections: [
+        { type: "title", text: "Step 2: Print all Parts" },
+        { type: "image", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/parts.jpg" },
+        { type: "video", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/insertcable.mp4" },
+        { type: "text", text: "Print all required parts. Make sure to add a pause at the end of the connector gap in the base part so the cable can be inserted directly during printing." }
+    ]
+},
+
+{
+    title: "Step 3: Insert Heat Inserts",
+    sections: [
+        { type: "title", text: "Step 3: Insert Heat Inserts" },
+        { type: "video", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/heatinserting.mp4" },
+        { type: "text", text: "Insert the M3x6mm heat inserts into the printed parts. Use a soldering iron or heat insert tool to carefully melt them into place." }
+    ]
+},
+
+{
+    title: "Step 4: Solder the parts onto the PCB",
+    sections: [
+        { type: "title", text: "Step 4: Solder the parts onto the PCB" },
+        { type: "image", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/soldering.jpg" },
+        {
+            type: "list",
+            items: [
+                { text: "Main PCB (from Etsy)", url: "https://aliexpress.com/item/1005009890033383.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/PCB.jpg" },
+                { text: "Arduino D1 Mini (Pin Headers)", url: "https://aliexpress.com/item/1005009890033383.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/d1mini.jpg" },
+                { text: "Capacitor 35V 1000uF", url: "https://aliexpress.com/item/1005011631970768.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/capacitor.jpg" },
+                { text: "Resistor 330Ω", url: "https://aliexpress.com/item/1005010228694988.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/resistor.jpg" },
+                { text: "2.54mm Pin Headers", url: "https://aliexpress.com/item/1005007528068254.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/pinheader.jpg" }
+            ]
+        },
+        { type: "text", text: "Solder all components onto the PCB according to the layout." },
+        { type: "image", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/soldered.jpg" },
+        { type: "text", text: "After soldering everything, your PCB should look similar to the example shown above." }
+    ]
+},
+
+{
+    title: "Step 5: Mount Button and Power Connector",
+    sections: [
+        { type: "title", text: "Step 5: Mount Button and Power Connector" },
+        { type: "image", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/buttonscheme.jpg" },
+        { type: "text", text: "If you use the same button model, wire it exactly as shown in the diagram. If you use a different model, check the wiring diagram from your supplier." },
+        { type: "video", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/buttonmounting.mp4" },
+        { type: "text", text: "Secure the button and power connector into the base print." }
+    ]
+},
+
+{
+    title: "Step 6: Mount the PCBs and the Motor",
+    sections: [
+        { type: "title", text: "Step 6: Mount the PCBs and the Motor" },
+        { type: "video", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/mountpcbmotor.mp4" },
+        { type: "text", text: "Mount the motor and PCB assemblies into the base part using the M3 screws." },
+        { type: "video", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/cable1.mp4" },
+        { type: "text", text: "After installation, connect all wires according to the markings on the PCBs." }
+    ]
+},
+
+{
+    title: "Step 7: Mount Rubber Feet",
+    sections: [
+        { type: "title", text: "Step 7: Mount Rubber Feet" },
+        { type: "video", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/feet.mp4" },
+        {
+            type: "list",
+            items: [
+                { text: "Rubber Feet", url: "https://de.aliexpress.com/item/1005004654295448.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/rubberfeet.jpg" },
+                { text: "Mounting Screws (M4x12)", url: "https://aliexpress.com/item/1005008818351381.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/cylinderheadscrew.jpg" },
+                { text: "Matching Nuts (M4) / Inserts", url: "https://aliexpress.com/item/1005007593861199.html?", img: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/nut.jpg" }
+            ]
+        },
+        { type: "text", text: "Attach the rubber feet to the bottom of the base to provide stability and prevent slipping during operation." }
+    ]
+},
+
+{
+    title: "Step 8: Press-Fit the Bearing",
+    sections: [
+        { type: "title", text: "Step 8: Press-Fit the Bearing" },
+        { type: "video", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/bearring.mp4" },
+        { type: "text", text: "Carefully press the 6908ZZ bearing into the designated opening in the base part. Make sure it sits perfectly flush and rotates smoothly." }
+    ]
+},
+
+{
+    title: "Step 9: Install Steel Ball Plungers",
+    sections: [
+        { type: "title", text: "Step 9: Install Steel Ball Plungers" },
+        { type: "video", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/ballplunger.mp4" },
+        { type: "text", text: "Press the steel ball plungers into the rotating adapter. They create the click-stop positions for the rotation plate." }
+    ]
+},
+
+{
+    title: "Step 10: Organize the Cables",
+    sections: [
+        { type: "title", text: "Step 10: Organize the Cables" },
+        { type: "image", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/cablemanagement.jpg" },
+        { type: "text", text: "Neatly arrange all cables inside the base so that nothing interferes with the rotating parts." }
+    ]
+},
+
+{
+    title: "Step 11: Program the D1 Mini",
+    sections: [
+        { type: "title", text: "Step 11: Program the D1 Mini" },
+        {
+            type: "list",
+            items: [
+                { text: "Arduino IDE Download", url: "https://www.arduino.cc/en/software/" },
+                { text: "ESP8266 Board Driver (for Aliexpress D1 Mini)", url: "https://github.com/SHWotever/FakeCH340DriverFixer/releases/tag/1.1" },
+                { text: "Latest Rotary Table Firmware", url: "https://github.com/piodeer/RotaryTable_LEDeffects/tree/main/sketch" }
+            ]
+        },
+        { type: "text", text: "Install the Arduino IDE and add the ESP8266 board package so the D1 Mini can be programmed. If you have some issues, try ask ChatGPT in my case I always solved the problems this way."},
+        { type: "image", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/libraries.jpg" },
+        { type: "text", text: "In the program you have to adjust you Wifi Name and Password, so the D1 Mini can connect with it. If you use other LEDs you can adjust the LED Count in the blue field."},
+        { type: "text", text: "Upload the Rotary Table firmware to the controller." },
+        { type: "text", text: "In the SerialMonitor you should see an IP Address if everything worked fine. Paste this Adress in your browser and you should see the control page for your Rotating Table." },
+        { type: "image", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/web.jpg" },
+        { type: "text", text: "The firmware allows full control of the stepper motor speed, rotation movements, LED brightness, colors and animation effects. After setup, the rotary table creates its own WiFi interface so any device in your home network can control the table." }
+    ]
+},
+
+{
+    title: "Step 12: Install the LED Strip",
+    sections: [
+        { type: "title", text: "Step 12: Install the LED Strip" },
+        { type: "video", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/ledstrip.mp4" },
+        { type: "text", text: "Glue the LED strip into the LED channel around the rotating table. Make sure the magnetic connector is already soldered to the strip." },
+        { type: "video", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/frame.mp4" },
+        { type: "text", text: "Assemble the outer ring components and install the diffuser panel to achieve smooth and even lighting." }
+    ]
+},
+
+{
+    title: "Step 13: Final Assembly",
+    sections: [
+        { type: "title", text: "Step 13: Final Assembly" },
+        { type: "video", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/plate1.mp4" },
+        { type: "text", text: "Press the rotation plate onto the rotating adapter until the steel ball plungers snap into place." },
+        { type: "text", text: "Once installed, the rotating table is fully assembled and ready for product photography." }
+    ]
+},
+
+{
+    title: "Success!",
+    // WICHTIG: Nutze /embed/ statt /shorts/
+    video: "https://www.youtube.com/embed/-k997PMsLOE", 
+    text: "Assembly complete✅ Your Rotary Table is now ready for its first photo shooting session."
+}
+]
+};
+
+        const container = document.getElementById('steps-container');
+        const dotsContainer = document.getElementById('progress-dots');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtnLabel = document.getElementById('next-btn-label');
+        document.getElementById('main-title').innerText = config.title;
+
+        function getStepNumber(step, fallbackNumber){
+            const title = step?.title || '';
+            const titleSection = Array.isArray(step?.sections) ? (step.sections.find(s => s?.type === 'title')?.text || '') : '';
+            const m = (title || titleSection).match(/Step\s+(\d+)/i);
+            if (m) return Number(m[1]);
+            return fallbackNumber;
+        }
+
+        function renderBadge(stepNo, subNo){
+            return `<span class="substep-badge">${stepNo}.${subNo}</span>`;
+        }
+
+        function formatCurrency(value){
+            const v = Number(value) || 0;
+            return v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+        function renderPricePill(price){
+            if (price === undefined || price === null || price === '') {
+                return `<span class="price-pill muted">—</span>`;
+            }
+            const n = Number(price);
+            if (!Number.isFinite(n)) return `<span class="price-pill muted">—</span>`;
+            return `<span class="price-pill">$${formatCurrency(n)}</span>`;
+        }
+        function computeTotalFromConfig(){
+            let total = 0;
+            (config?.steps || []).forEach((step) => {
+                const sections = Array.isArray(step?.sections) ? step.sections : [];
+                sections.forEach((section) => {
+                    if (section?.type !== 'list' || !Array.isArray(section?.items)) return;
+                    section.items.forEach((it) => {
+                        if (typeof it === 'string') return;
+                        const p = Number(it?.price);
+                        if (Number.isFinite(p)) total += p;
+                    });
+                });
+            });
+            return total;
+        }
+        function updateTotals(){
+            const totalEls = document.querySelectorAll('[data-cost-total]');
+            const total = computeTotalFromConfig();
+            totalEls.forEach(el => {
+                el.textContent = `$${formatCurrency(total)}`;
+            });
+        }
+        function renderCostSummary(stepNo, subNo){
+            const badge = renderBadge(stepNo, subNo);
+            return `
+                <div class="block substep">
+                    ${badge}
+                    <div class="cost-summary">
+                        <div>
+                            <div class="meta">Total cost (guide price for purchased parts – actual cost can vary by supplier)</div>
+                            <div class="total" data-cost-total>$0.00</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderList(list, badgeHtml = '', titleText = '') {
+            if (!list) return '';
+            const isTools = titleText && titleText.trim().toLowerCase() === 'tools';
+            const hasPrice = list.some(it => typeof it !== 'string' && it && it.price !== undefined && it.price !== null && it.price !== '');
+
+            const items = list.map(item => {
+                if (typeof item === 'string') {
+                    const label = item;
+                    // Tools are simple strings without price slot
+                    if (isTools) {
+                        return `<li class="no-img"><span class="list-text">${label}</span></li>`;
+                    }
+                    if (!hasPrice) {
+                        return `<li class="no-img"><span class="list-text">${label}</span></li>`;
+                    }
+                    return `<li class="no-img"><span class="list-text">${label}</span>${renderPricePill(undefined)}</li>`;
+                }
+
+                const label = item.text || item.label || '';
+                const hasImg = Boolean(item.img);
+                const liClass = hasImg ? 'has-img' : 'no-img';
+                const img = hasImg ? `<img class="list-img" src="${item.img}" alt="">` : '';
+
+                if (item.url) {
+                    if (!hasPrice) {
+                        return `<li class="${liClass}">${img}<a class="list-text" href="${item.url}" target="_blank" rel="noopener noreferrer">${label}</a></li>`;
+                    }
+                    return `<li class="${liClass}">${img}<a class="list-text" href="${item.url}" target="_blank" rel="noopener noreferrer">${label}</a>${renderPricePill(item.price)}</li>`;
+                }
+
+                if (!hasPrice) {
+                    return `<li class="${liClass}">${img}<span class="list-text">${label}</span></li>`;
+                }
+                return `<li class="${liClass}">${img}<span class="list-text">${label}</span>${renderPricePill(item.price)}</li>`;
+            }).join('');
+
+            const title = titleText ? `<div class="title" style="font-size:18px; margin-bottom:10px;">${titleText}</div>` : '';
+            const ulClass = isTools || !hasPrice ? 'no-price' : 'with-price';
+            return `<div class="block list substep">${badgeHtml}${title}<ul class="${ulClass}">${items}</ul></div>`;
+        }
+
+        function getInventoryComponents(){
+            // Source-of-truth: Step 1 inventory list (first component list with images/prices)
+            const steps = Array.isArray(config?.steps) ? config.steps : [];
+            for (const step of steps) {
+                const sections = Array.isArray(step?.sections) ? step.sections : [];
+                for (const section of sections) {
+                    if (section?.type !== 'list' || !Array.isArray(section?.items)) continue;
+                    const objs = section.items.filter(it => typeof it === 'object' && it && (it.img || it.url || it.price !== undefined));
+                    const hasAnyImg = objs.some(it => Boolean(it?.img));
+                    const hasAnyPrice = objs.some(it => it?.price !== undefined && it?.price !== null && it?.price !== '');
+                    if (objs.length && hasAnyImg && hasAnyPrice) return objs;
+                }
+            }
+            return [];
+        }
+
+        function normalizeKey(s){
+            return String(s || '')
+                .toLowerCase()
+                .replace(/\s+/g, ' ')
+                .replace(/[()]/g, '')
+                .replace(/[–—-]/g, '-')
+                .trim();
+        }
+
+        const INVENTORY = getInventoryComponents();
+        const INVENTORY_BY_TEXT = new Map(
+            INVENTORY.map(it => [normalizeKey(it?.text || it?.label || ''), it]).filter(([k]) => Boolean(k))
+        );
+        const INVENTORY_KEYS = Array.from(INVENTORY_BY_TEXT.keys());
+
+        function findInventoryByLabel(label){
+            const key = normalizeKey(label);
+            if (!key) return null;
+            const exact = INVENTORY_BY_TEXT.get(key);
+            if (exact) return exact;
+
+            // Fuzzy/contains matching for labels like "Main PCB (from Etsy)" vs "PCB"
+            let bestKey = '';
+            for (const invKey of INVENTORY_KEYS) {
+                if (!invKey) continue;
+                if (key.includes(invKey) || invKey.includes(key)) {
+                    // prefer the most specific (longest) match
+                    if (invKey.length > bestKey.length) bestKey = invKey;
+                }
+            }
+            return bestKey ? (INVENTORY_BY_TEXT.get(bestKey) || null) : null;
+        }
+
+        const COMPONENTS_OVERRIDE_BY_STEP_NO = {
+            2: ['Magnetic Connectorcable'],
+            3: ['Heat Inserts (M3x6mm)'],
+            4: ['PCB', 'Arduino D1 Mini', 'Capacitor 35V 1000uF', 'Resistor 330Ω', '2.54mm Pin Headers'],
+            5: ['DC-Mount 5,5 x 2,1 mm (Type D)', 'Latching Switch (3-6V)', 'Dupont Connector Cables'],
+            6: ['Motor and Driver (ULN2003)', 'Dupont Connector Cables', 'PCB'],
+            7: ['Rubber Feet (20x15x8mm)', 'Mounting Screws (M4x12)', 'Matching Nuts (M4) / Inserts'],
+            8: ['Bearring (6908ZZ)'],
+            9: ['Steel Ball Plungers (4mm x 5)'],
+            12: ['LED WS2811 (5V, 720 LEDs/m)', 'Magnetic Connectorcable'],
+        };
+
+        function getOverrideComponentsForStep(stepNo){
+            const labels = COMPONENTS_OVERRIDE_BY_STEP_NO?.[stepNo];
+            if (!Array.isArray(labels) || !labels.length) return [];
+            const out = [];
+            const seen = new Set();
+            labels.forEach(lbl => {
+                const inv = findInventoryByLabel(lbl);
+                if (!inv) return;
+                const key = normalizeKey(inv?.text || inv?.label || lbl);
+                if (!key || seen.has(key)) return;
+                seen.add(key);
+                out.push(inv);
+            });
+            return out;
+        }
+
+        function isComponentListItems(items){
+            if (!Array.isArray(items) || !items.length) return false;
+            const objItems = items.filter(it => typeof it === 'object' && it);
+            if (!objItems.length) return false;
+
+            // If most object items match inventory, treat as component list (to prevent duplicates like 4.3 / 7.3)
+            let matchCount = 0;
+            for (const it of objItems) {
+                const label = it?.text || it?.label || '';
+                if (findInventoryByLabel(label)) matchCount += 1;
+            }
+            return matchCount >= Math.max(2, Math.ceil(objItems.length * 0.6));
+        }
+
+        function getComponentsFromStepText(step){
+            if (!INVENTORY_KEYS.length) return [];
+
+            const chunks = [];
+            if (step?.title) chunks.push(String(step.title));
+            const sections = Array.isArray(step?.sections) ? step.sections : [];
+            for (const sec of sections) {
+                if (sec?.type === 'title' && sec?.text) chunks.push(String(sec.text));
+                if (sec?.type === 'text' && sec?.text) chunks.push(String(sec.text));
+                // sometimes items contain component names even if we don't want to display the list itself
+                if (sec?.type === 'list' && Array.isArray(sec?.items)) {
+                    sec.items.forEach(it => {
+                        if (typeof it === 'string') chunks.push(it);
+                        else if (it && (it.text || it.label)) chunks.push(String(it.text || it.label));
+                    });
+                }
+            }
+
+            const blob = normalizeKey(chunks.join(' | '));
+            if (!blob) return [];
+
+            const out = [];
+            const seen = new Set();
+
+            // match by inventory keys present in step text
+            for (const invKey of INVENTORY_KEYS) {
+                if (!invKey) continue;
+                if (blob.includes(invKey)) {
+                    const inv = INVENTORY_BY_TEXT.get(invKey);
+                    if (!inv) continue;
+                    if (seen.has(invKey)) continue;
+                    seen.add(invKey);
+                    out.push(inv);
+                }
+            }
+
+            // fallback: try fuzzy match against whole title/text chunks
+            if (!out.length) {
+                for (const chunk of chunks) {
+                    const inv = findInventoryByLabel(chunk);
+                    if (!inv) continue;
+                    const key = normalizeKey(inv?.text || inv?.label || '');
+                    if (!key || seen.has(key)) continue;
+                    seen.add(key);
+                    out.push(inv);
+                }
+            }
+
+            return out;
+        }
+
+        config.steps.forEach((step, i) => {
+            const stepElement = document.createElement('div');
+            stepElement.className = 'step';
+            
+            let html = `<div class="step-scroll"><div class="step-content">`;
+            
+            if(step.isHome) {
+                html += `<div class="block hero-img"><img src="${step.image}"></div>`;
+                html += `<div class="block"><div class="title">${step.title}</div><div class="text">${step.text}</div>`;
+                if(step.guide) {
+                    html += `<div class="nav-guide"><span>📄 If you wish you can download the guide as a PDF</span></div>`;
+                }
+                html += `</div>`;
+            } else if (Array.isArray(step.sections)) {
+                const stepNo = getStepNumber(step, i);
+                let subNo = 0;
+
+                // Interpret components from step text; render right after the title section.
+                // Skip the inventory step itself to avoid duplication.
+                const isInventoryStep = /inventory/i.test(step?.title || '') || /inventory/i.test(step?.sections?.find?.(s => s?.type === 'title')?.text || '');
+                const overrideComponents = (!isInventoryStep && INVENTORY.length) ? getOverrideComponentsForStep(stepNo) : [];
+                const inferredComponents = (!isInventoryStep && INVENTORY.length && !overrideComponents.length) ? getComponentsFromStepText(step) : [];
+                const usedComponents = overrideComponents.length ? overrideComponents : inferredComponents;
+                let didRenderComponentsAfterTitle = false;
+                const hasTitleSection = step.sections.some(sec => sec?.type === 'title' && sec?.text);
+                if (!hasTitleSection && step.title) {
+                    html += `<div class="block title">${step.title}</div>`;
+                    if (usedComponents.length) {
+                        subNo += 1;
+                        html += renderList(usedComponents, renderBadge(stepNo, subNo), 'Components');
+                        didRenderComponentsAfterTitle = true;
+                    }
+                }
+
+                for (let s = 0; s < step.sections.length; s++) {
+                    const section = step.sections[s];
+                    const next = step.sections[s + 1];
+
+                    // Combine: title + list (same kachel)
+                    if (section?.type === 'title' && section?.text && next?.type === 'list' && next?.items) {
+                        // Skip component list blocks in steps; they are shown in "Components" tile after title.
+                        if (usedComponents.length && isComponentListItems(next.items)) {
+                            html += `<div class="block title">${section.text}</div>`;
+                            if (!didRenderComponentsAfterTitle && usedComponents.length) {
+                                subNo += 1;
+                                html += renderList(usedComponents, renderBadge(stepNo, subNo), 'Components');
+                                didRenderComponentsAfterTitle = true;
+                            }
+                            s += 1; // consume the list
+                            continue;
+                        }
+                        subNo += 1;
+                        html += renderList(next.items, renderBadge(stepNo, subNo), section.text);
+                        s += 1;
+                        continue;
+                    }
+
+                    if (section?.type === 'title') {
+                        if (section.text) {
+                            html += `<div class="block title">${section.text}</div>`;
+                        }
+                        if (!didRenderComponentsAfterTitle && usedComponents.length) {
+                            subNo += 1;
+                            html += renderList(usedComponents, renderBadge(stepNo, subNo), 'Components');
+                            didRenderComponentsAfterTitle = true;
+                        }
+                        continue;
+                    }
+
+                    const isMedia = section?.type === 'image' || section?.type === 'video';
+                    const hasFollowingText = isMedia && next?.type === 'text' && typeof next?.text === 'string' && next.text.trim().length > 0;
+
+                    // Pair media + next text into one "tile" (same kachel)
+                    if (hasFollowingText && section.src) {
+                        subNo += 1;
+                        const badge = renderBadge(stepNo, subNo);
+
+                        if (section.type === 'image') {
+                            html += `
+                                <div class="block substep tile">
+                                    ${badge}
+                                    <div class="tile-media hero-img"><img src="${section.src}"></div>
+                                    <div class="tile-text"><div class="text">${next.text}</div></div>
+                                </div>
+                            `;
+                        } else {
+                            const qrUrl = encodeURIComponent(section.src);
+                            html += `
+                                <div class="block substep tile video-tile">
+                                    ${badge}
+                                    <div class="tile-media video">
+                                        <video controls><source src="${section.src}"></video>
+                                        <div class="qr-print-only">
+                                            <div class="text" style="margin-bottom:8px;">Scan for video</div>
+                                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${qrUrl}" alt="QR code to video">
+                                        </div>
+                                    </div>
+                                    <div class="tile-text"><div class="text">${next.text}</div></div>
+                                </div>
+                            `;
+                        }
+
+                        s += 1; // skip the consumed text section
+                        continue;
+                    }
+
+                    // Standalone sections (also get a sub-number)
+                    if (section?.type === 'image' && section.src) {
+                        subNo += 1;
+                        html += `<div class="block hero-img substep">${renderBadge(stepNo, subNo)}<img src="${section.src}"></div>`;
+                        continue;
+                    }
+if (section?.type === 'video' && section.src) {
+    subNo += 1;
+    const qrUrl = encodeURIComponent(section.src);
+    const isYouTube = section.src.includes('youtube.com') || section.src.includes('youtu.be');
+
+    let videoContent;
+    if (isYouTube) {
+        // YouTube Embed für Shorts (Hochformat 9:16)
+        videoContent = `
+            <div style="position:relative; padding-bottom:177%; height:0; overflow:hidden; border-radius:20px; background:#000;">
+                <iframe src="${section.src}" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" allowfullscreen></iframe>
+            </div>`;
+    } else {
+        // Normaler Player für deine .mp4 Dateien
+        videoContent = `<video controls><source src="${section.src}"></video>`;
+    }
+
+    html += `
+        <div class="block video substep">
+            ${renderBadge(stepNo, subNo)}
+            ${videoContent}
+            <div class="qr-print-only">
+                <div class="text" style="margin-bottom:8px;">Scan for video</div>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${qrUrl}" alt="QR code">
+            </div>
+        </div>`;
+    continue;
+}
+                    if (section?.type === 'text' && section.text) {
+                        subNo += 1;
+                        html += `<div class="block text substep">${renderBadge(stepNo, subNo)}${section.text}</div>`;
+                        continue;
+                    }
+                    if (section?.type === 'list' && section.items) {
+                        // Remove duplicate component lists (e.g. old 4.3 / 7.3 blocks)
+                        if (usedComponents.length && isComponentListItems(section.items)) {
+                            continue;
+                        }
+                        subNo += 1;
+                        html += renderList(section.items, renderBadge(stepNo, subNo));
+                        continue;
+                    }
+                    if (section?.type === 'icons' && section.items) {
+                        subNo += 1;
+                        html += `<div class="block icons substep">${renderBadge(stepNo, subNo)}${section.items.map(icon => `<div class="icon">${icon}</div>`).join('')}</div>`;
+                        continue;
+                    }
+                    if (section?.type === 'costSummary') {
+                        subNo += 1;
+                        html += renderCostSummary(stepNo, subNo);
+                        continue;
+                    }
+                }
+            } else {
+                if(step.title) html += `<div class="block title">${step.title}</div>`;
+                const images = step.images || (step.image ? [step.image] : []);
+                images.forEach(src => {
+                    html += `<div class="block hero-img"><img src="${src}"></div>`;
+                });
+                if (step.video) {
+                    const qrUrl = encodeURIComponent(step.video);
+                    const isYouTube = /youtube\.com|youtu\.be/.test(step.video);
+
+                    let videoContent;
+                    if (isYouTube) {
+                        const match = step.video.match(/(?:v=|\/embed\/|\/shorts\/|youtu\.be\/)([^&?]+)/);
+                        const videoId = match ? match[1] : '-k997PMsLOE';
+
+                        videoContent = `
+                            <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" style="text-decoration:none; color:inherit;">
+                                <div style="position:relative; width:100%; border-radius:20px; overflow:hidden;">
+                                    <img src="https://img.youtube.com/vi/${videoId}/hqdefault.jpg" style="width:100%; display:block; border-radius:20px;">
+                                    
+                                    <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.1);">
+                                        <div style="background:rgba(255,255,255,0.25); width:64px; height:64px; border-radius:50%; display:flex; align-items:center; justify-content:center; padding-left:5px; border:2px solid rgba(255,255,255,0.5); backdrop-filter: blur(2px);">
+                                            <div style="width: 0; height: 0; border-top: 14px solid transparent; border-bottom: 14px solid transparent; border-left: 22px solid rgba(255,255,255,0.9);"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="text-align:center; margin-top:12px; font-weight:600; color:#007aff;">
+                                    ▶ Watch video on YouTube
+                                </div>
+                            </a>`;
+                    } else {
+                        // Standard für lokale .mp4 Dateien
+                        videoContent = `<video controls style="width:100%; border-radius:20px; display:block;"><source src="${step.video}"></video>`;
+                    }
+
+                    html += `
+                        <div class="block video">
+                            ${videoContent}
+                            <div class="qr-print-only">
+                                <div class="text" style="margin-bottom:8px;">Scan for video</div>
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${qrUrl}" alt="QR code">
+                            </div>
+                        </div>`;
+                }
+                if(step.text)  html += `<div class="block text">${step.text}</div>`;
+                if(step.list)  html += renderList(step.list);
+                if(step.icons) {
+                    html += `<div class="block icons">${step.icons.map(icon => `<div class="icon">${icon}</div>`).join('')}</div>`;
+                }
+            }
+            
+            html += `<div class="bottom-spacer" aria-hidden="true"></div></div></div>`;
+            stepElement.innerHTML = html;
+            container.appendChild(stepElement);
+
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            dotsContainer.appendChild(dot);
+        });
+
+        function handleScroll() {
+            const index = Math.round(container.scrollLeft / window.innerWidth);
+            document.querySelectorAll('.dot').forEach((dot, i) => dot.classList.toggle('active', i === index));
+            prevBtn.disabled = index <= 0;
+
+            if (index >= config.steps.length - 1) {
+                nextBtnLabel.textContent = 'Back to start';
+            } else if (index === 0) {
+                nextBtnLabel.textContent = 'Start';
+            } else {
+                nextBtnLabel.textContent = 'Next step';
+            }
+        }
+
+        container.addEventListener('scroll', handleScroll);
+        window.addEventListener('resize', handleScroll);
+
+        function updateViewportVars(){
+            // Reliable vh on mobile + accurate scroll area sizing
+            document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+
+            const header = document.querySelector('.header');
+            const cta = document.querySelector('.cta-bar');
+            const footer = document.querySelector('.footer-ui');
+            const headerH = header ? Math.ceil(header.getBoundingClientRect().height) : 60;
+            const ctaH = cta ? Math.ceil(cta.getBoundingClientRect().height) : 56;
+            const footerH = footer ? Math.ceil(footer.getBoundingClientRect().height) : 64;
+            document.documentElement.style.setProperty('--header-h', `${headerH}px`);
+            document.documentElement.style.setProperty('--cta-h', `${ctaH}px`);
+            document.documentElement.style.setProperty('--footer-h', `${footerH}px`);
+        }
+
+        nextBtn.addEventListener('click', () => {
+            const index = Math.round(container.scrollLeft / window.innerWidth);
+            const nextIndex = (index >= config.steps.length - 1) ? 0 : index + 1;
+            container.scrollTo({ left: nextIndex * window.innerWidth, behavior: 'smooth' });
+        });
+        prevBtn.addEventListener('click', () => {
+            const index = Math.round(container.scrollLeft / window.innerWidth);
+            const prevIndex = Math.max(0, index - 1);
+            container.scrollTo({ left: prevIndex * window.innerWidth, behavior: 'smooth' });
+        });
+
+        window.addEventListener('resize', updateViewportVars);
+        updateViewportVars();
+        handleScroll();
+
+        // Lightbox / image preview
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        function openLightbox(src){
+            if (!src) return;
+            lightboxImg.src = src;
+            lightbox.classList.add('open');
+        }
+        function closeLightbox(){
+            lightbox.classList.remove('open');
+            lightboxImg.src = '';
+        }
+        lightbox.addEventListener('click', closeLightbox);
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Delegate clicks on any image inside steps
+        container.addEventListener('click', (e) => {
+            const img = e.target?.closest?.('img');
+            if (!img) return;
+            // ignore header logo
+            if (img.closest('.header')) return;
+            const src = img.getAttribute('src');
+            if (!src) return;
+            openLightbox(src);
+        });
+
+        // initial totals after first render
+        updateTotals();
+    </script>
+</body>
+</html>
