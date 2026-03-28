@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rotary Table Assembly Guide</title>
+    <title>Orbio - the rotating table - Assembly Guide</title>
+    
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="shortcut icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
 
     <style>
         /* --- BASE STYLES --- */
@@ -20,10 +24,10 @@
         }
         body { 
             margin: 0; 
-            background: #f2f2f7; 
+            background: #EFE4D6; 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
             overflow: hidden;
-            color: #1c1c1e; 
+            color: #6B4F3A; 
         }
         
         /* --- HEADER --- */
@@ -33,11 +37,11 @@
             width: 100%; 
             padding: 12px 18px; 
             font-weight: 600; 
-            background: rgba(255, 255, 255, 0.8); 
+            background: rgba(239, 228, 214, 0.9); 
             backdrop-filter: blur(20px); 
             -webkit-backdrop-filter: blur(20px); 
             z-index: 10; 
-            border-bottom: 0.5px solid rgba(0,0,0,0.1); 
+            border-bottom: 0.5px solid rgba(107, 79, 58, 0.15); 
             display: flex;
             align-items: center;
             justify-content: center;
@@ -52,7 +56,7 @@
             height: 28px;
             width: 28px;
             border-radius: 8px;
-            filter: invert(1);
+            filter: none;
         }
         .header-title{
             font-size: 15px;
@@ -104,27 +108,27 @@
         .step-content { max-width: 500px; width: 100%; }
 
         /* --- BLOCKS --- */
-        .block { background: white; border-radius: 24px; padding: 22px; margin-bottom: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .block { background: rgba(255, 255, 255, 0.7); border-radius: 24px; padding: 22px; margin-bottom: 16px; box-shadow: 0 4px 20px rgba(107, 79, 58, 0.08); }
         .title { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 10px; }
         .hero-img img, .video video { width: 100%; border-radius: 20px; display: block; }
         .qr-print-only{
             display: none;
         }
-        .text { font-size: 16px; line-height: 1.5; color: #6e6e73; }
+        .text { font-size: 16px; line-height: 1.5; color: rgba(107, 79, 58, 0.8); }
         
         /* --- UI ELEMENTS --- */
-        .nav-guide { display: flex; justify-content: space-around; margin-top: 20px; padding: 15px; background: #f2f2f7; border-radius: 18px; font-size: 13px; font-weight: 500; }
+        .nav-guide { display: flex; justify-content: space-around; margin-top: 20px; padding: 15px; background: rgba(107, 79, 58, 0.08); border-radius: 18px; font-size: 13px; font-weight: 500; border: 1px solid rgba(107, 79, 58, 0.12); }
         .print-btn {
             position: fixed; top: 15px; right: 15px; z-index: 20;
-            background: #007aff; color: white; border: none;
+            background: #8B6130; color: white; border: none;
             padding: 8px 16px; border-radius: 12px; font-size: 13px; font-weight: 600;
-            cursor: pointer; box-shadow: 0 4px 10px rgba(0,122,255,0.3);
+            cursor: pointer; box-shadow: 0 4px 10px rgba(139, 97, 46, 0.3);
         }
 
         .icons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .icon { background: #f2f2f7; border-radius: 12px; padding: 12px; font-size: 14px; font-weight: 500; text-align: center; }
+        .icon { background: rgba(107, 79, 58, 0.08); border-radius: 12px; padding: 12px; font-size: 14px; font-weight: 500; text-align: center; }
         .list a{
-            color: #34c759;
+            color: #8B6130;
             text-decoration: underline;
             font-weight: 500;
         }
@@ -167,15 +171,15 @@
             font-size: 12px;
             font-weight: 900;
             letter-spacing: 0.2px;
-            color: #1c1c1e;
-            background: rgba(52, 199, 89, 0.14);
-            border: 1px solid rgba(52, 199, 89, 0.28);
+            color: #6B4F3A;
+            background: rgba(139, 97, 46, 0.14);
+            border: 1px solid rgba(139, 97, 46, 0.28);
             white-space: nowrap;
         }
         .price-pill.muted{
-            color: #8e8e93;
-            background: rgba(142, 142, 147, 0.12);
-            border: 1px solid rgba(142, 142, 147, 0.22);
+            color: rgba(107, 79, 58, 0.6);
+            background: rgba(107, 79, 58, 0.12);
+            border: 1px solid rgba(107, 79, 58, 0.22);
         }
         .cost-summary{
             display: flex;
@@ -189,7 +193,7 @@
             letter-spacing: -0.2px;
         }
         .cost-summary .meta{
-            color: #6e6e73;
+            color: rgba(107, 79, 58, 0.7);
             font-size: 13px;
             font-weight: 600;
         }
@@ -199,7 +203,7 @@
             height: 60px;
             object-fit: cover;
             border-radius: 8px;
-            background: #eee;
+            background: #DCCCC0;
             cursor: zoom-in;
         }   
 
@@ -215,7 +219,7 @@
             width: 42px;
             height: 42px;
             border-radius: 999px;
-            background: rgba(52, 199, 89, 0.95);
+            background: rgba(139, 97, 46, 0.95);
             color: #fff;
             display: inline-flex;
             align-items: center;
@@ -223,7 +227,7 @@
             font-weight: 800;
             font-size: 13px;
             letter-spacing: 0.2px;
-            box-shadow: 0 10px 26px rgba(52,199,89,0.22);
+            box-shadow: 0 10px 26px rgba(139,97,46,0.22);
             border: 1px solid rgba(255,255,255,0.22);
             z-index: 2;
         }
@@ -239,7 +243,7 @@
             padding-top: 0;
         }
         .tile .tile-text .text{
-            color: #6e6e73;
+            color: rgba(107, 79, 58, 0.8);
         }
         @media (max-width: 520px){
             .tile-media{
@@ -284,11 +288,11 @@
         }
 
         /* --- FOOTER UI --- */
-        .footer-ui { position: fixed; bottom: 0; width: 100%; padding-bottom: 52px; background: linear-gradient(to top, #f2f2f7 80%, transparent); pointer-events: none; z-index: 10; }
+        .footer-ui { position: fixed; bottom: 0; width: 100%; padding-bottom: 52px; background: linear-gradient(to top, #EFE4D6 80%, transparent); pointer-events: none; z-index: 10; }
         .progress { display: flex; justify-content: center; gap: 8px; margin-bottom: 12px; }
-        .dot { width: 7px; height: 7px; border-radius: 50%; background: #d1d1d6; transition: all 0.4s ease; }
-        .dot.active { background: #007aff; width: 18px; border-radius: 4px; }
-        .swipe-hint { text-align: center; font-size: 11px; font-weight: 600; color: #8e8e93; text-transform: uppercase; letter-spacing: 1px; }
+        .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(107, 79, 58, 0.3); transition: all 0.4s ease; }
+        .dot.active { background: #8B6130; width: 18px; border-radius: 4px; }
+        .swipe-hint { text-align: center; font-size: 11px; font-weight: 600; color: rgba(107, 79, 58, 0.6); text-transform: uppercase; letter-spacing: 1px; }
 
         .cta-bar {
             position: fixed;
@@ -302,7 +306,7 @@
         }
         .nav-btn{
             border: none;
-            background: rgba(52, 199, 89, 0.95);
+            background: rgba(139, 97, 46, 0.95);
             color: #fff;
             font-weight: 700;
             letter-spacing: 0.1px;
@@ -314,12 +318,12 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            box-shadow: 0 10px 26px rgba(52,199,89,0.25);
+            box-shadow: 0 10px 26px rgba(139,97,46,0.25);
             border: 1px solid rgba(255,255,255,0.18);
         }
         .nav-btn.secondary{
-            background: rgba(44, 44, 46, 0.86);
-            box-shadow: 0 10px 26px rgba(0,0,0,0.22);
+            background: rgba(107, 79, 58, 0.86);
+            box-shadow: 0 10px 26px rgba(107, 79, 58, 0.22);
         }
         .nav-btn:active { transform: translateY(1px); }
         .nav-btn[disabled]{
@@ -362,7 +366,7 @@
 
             .block {
                 box-shadow: none;
-                border: 1px solid #eee;
+                border: 1px solid #DCCCC0;
                 break-inside: avoid;
                 border-radius: 16px;
                 padding: 14px;
@@ -395,7 +399,7 @@
                 gap: 6px;
                 align-items: center;
                 padding: 4px 8px;
-                border: 1px solid #eee;
+                border: 1px solid #DCCCC0;
                 border-radius: 10px;
             }
             .list ul.with-price li.no-img{
@@ -405,7 +409,7 @@
                 width: 48px;
                 height: 48px;
                 border-radius: 8px;
-                background: #f2f2f7;
+                background: #DCCCC0;
             }
             .list ul.with-price .list-text{
                 font-size: 11px;
@@ -414,15 +418,15 @@
                 padding: 4px 8px;
                 border-radius: 999px;
                 font-size: 10px;
-                border: 1px solid #d8f3df;
-                background: #ecfbf0;
+                border: 1px solid rgba(139, 97, 46, 0.28);
+                background: rgba(139, 97, 46, 0.14);
             }
             .icons { display: flex; justify-content: center; gap: 12px; }
             .icon { padding: 10px; font-size: 12px; border-radius: 10px; }
 
             .substep-badge{
                 box-shadow: none;
-                border: 1px solid #2bb34f;
+                border: 1px solid #8B6130;
                 width: 34px;
                 height: 34px;
                 font-size: 12px;
@@ -440,15 +444,244 @@
             }
         }
 
+        /* FLOATING SIDE PANEL - Desktop Only */
+        .side-panel {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 280px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 24px 18px;
+            box-shadow: 0 10px 40px rgba(107, 79, 58, 0.12);
+            border: 1px solid rgba(107, 79, 58, 0.1);
+            z-index: 5;
+            display: none;
+            flex-direction: column;
+            gap: 16px;
+            max-height: 80vh;
+            overflow-y: auto;
+            scrollbar-width: none;
+            opacity: 0.15;
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .side-panel::-webkit-scrollbar {
+            display: none;
+        }
+        @media (min-width: 1200px) {
+            .side-panel { display: flex; }
+        }
+        .side-panel:hover {
+            opacity: 1;
+        }
+        .side-panel-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(107, 79, 58, 0.6);
+            margin-bottom: 8px;
+        }
+        .side-panel-list {
+            font-size: 13px;
+            color: rgba(107, 79, 58, 0.7);
+            line-height: 1.6;
+        }
+        .side-panel-item {
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            opacity: 0.7;
+        }
+        .side-panel-item:hover {
+            background: rgba(139, 97, 46, 0.1);
+            opacity: 1;
+            transform: translateX(4px);
+        }
+        .side-panel-item.active {
+            background: rgba(139, 97, 46, 0.15);
+            color: #8B6130;
+            font-weight: 600;
+            opacity: 1;
+            border-left: 2px solid #8B6130;
+            padding-left: 10px;
+        }
+
+        /* HELP / FEEDBACK BUTTON */
+        .help-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(139, 97, 46, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 32px rgba(139, 97, 46, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 15;
+            pointer-events: auto;
+            user-select: none;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .help-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 40px rgba(139, 97, 46, 0.4);
+        }
+        .help-button:active {
+            transform: scale(0.95);
+        }
+
+        /* HELP MODAL */
+        .help-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 9999;
+        }
+        .help-modal.active {
+            display: flex;
+        }
+        .help-modal-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 32px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        .help-modal-content h2 {
+            font-size: 24px;
+            font-weight: 800;
+            color: #6B4F3A;
+            margin-bottom: 24px;
+            margin-top: 0;
+        }
+        .help-modal-description {
+            font-size: 14px;
+            color: rgba(107, 79, 58, 0.7);
+            line-height: 1.6;
+            margin-bottom: 24px;
+            margin-top: 0;
+        }
+        .help-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .help-option-btn {
+            padding: 16px 20px;
+            border: 2px solid rgba(139, 97, 46, 0.2);
+            background: rgba(139, 97, 46, 0.05);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 16px;
+            font-weight: 600;
+            color: #6B4F3A;
+            text-align: left;
+        }
+        .help-option-btn:hover {
+            border-color: rgba(139, 97, 46, 0.4);
+            background: rgba(139, 97, 46, 0.12);
+            transform: translateX(4px);
+        }
+        .help-modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #6B4F3A;
+            transition: transform 0.2s ease;
+        }
+        .help-modal-close:hover {
+            transform: rotate(90deg);
+        }
+        .help-modal-content {
+            position: relative;
+        }
+
         /* DARK MODE */
         @media (prefers-color-scheme: dark) {
-            body { background: #000; color: #fff; }
-            .header { background: rgba(28, 28, 30, 0.8); border-bottom: 0.5px solid #333; }
-            .block { background: #1c1c1e; }
-            .nav-guide, .icon { background: #2c2c2e; }
-            .footer-ui { background: linear-gradient(to top, #000 80%, transparent); }
-            .nav-btn { box-shadow: 0 10px 26px rgba(52,199,89,0.18); border: 1px solid rgba(255,255,255,0.12); }
+            body { background: #2a1f15; color: #f5f0e8; }
+            .header { background: rgba(42, 31, 21, 0.9); border-bottom: 0.5px solid rgba(139, 97, 46, 0.3); }
+            .block { background: #3d2e21; }
+            .nav-guide, .icon { background: rgba(139, 97, 46, 0.15); }
+            .footer-ui { background: linear-gradient(to top, #2a1f15 80%, transparent); }
+            .nav-btn { box-shadow: 0 10px 26px rgba(139,97,46,0.18); border: 1px solid rgba(255,255,255,0.12); }
             .nav-btn.secondary{ background: rgba(58,58,60,0.76); box-shadow: 0 10px 26px rgba(0,0,0,0.30); }
+            .side-panel {
+                background: rgba(61, 46, 33, 0.85);
+                border-color: rgba(139, 97, 46, 0.2);
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+                opacity: 0.08;
+            }
+            .side-panel:hover {
+                opacity: 1;
+            }
+            .side-panel-title {
+                color: rgba(245, 240, 232, 0.7);
+            }
+            .side-panel-list {
+                color: rgba(245, 240, 232, 0.8);
+            }
+            .side-panel-item:hover {
+                background: rgba(139, 97, 46, 0.15);
+            }
+            .side-panel-item.active {
+                background: rgba(139, 97, 46, 0.25);
+                color: #d4a574;
+            }
+            .help-button {
+                background: rgba(139, 97, 46, 0.8);
+                box-shadow: 0 8px 32px rgba(139, 97, 46, 0.25);
+            }
+            .help-button:hover {
+                box-shadow: 0 12px 40px rgba(139, 97, 46, 0.35);
+            }
+            .help-modal-content {
+                background: rgba(61, 46, 33, 0.95);
+                color: #f5f0e8;
+            }
+            .help-modal-content h2 {
+                color: #f5f0e8;
+            }
+            .help-modal-description {
+                color: rgba(245, 240, 232, 0.7);
+            }
+            .help-option-btn {
+                border-color: rgba(139, 97, 46, 0.3);
+                background: rgba(139, 97, 46, 0.1);
+                color: #f5f0e8;
+            }
+            .help-option-btn:hover {
+                border-color: rgba(139, 97, 46, 0.5);
+                background: rgba(139, 97, 46, 0.2);
+            }
+            .help-modal-close {
+                color: #f5f0e8;
+            }
         }
     </style>
 </head>
@@ -457,9 +690,31 @@
     <button class="print-btn" onclick="window.print()">Save as PDF</button>
     <div class="header">
         <div class="logo-wrap" aria-hidden="true">
-            <img src="https://raw.githubusercontent.com/piodeer/LinkTree/main/media/logo.png" alt="">
+            <img src="https://raw.githubusercontent.com/piodeer/LinkTree/123f2c662ee69c1d3352d1f69be6b601eb3a88ca/media/logo.png" alt="Orbio Logo">
         </div>
         <div class="header-title" id="main-title">Loading Guide...</div>
+    </div>
+
+    <!-- Floating Side Panel - Desktop Only -->
+    <div class="side-panel" id="sidePanel">
+        <div class="side-panel-title">📑 All Chapters</div>
+        <div class="side-panel-list" id="chapterList"></div>
+    </div>
+
+    <!-- Help Button -->
+    <button class="help-button" id="helpButton" title="Ask a question or report a bug">?</button>
+
+    <!-- Help Modal -->
+    <div class="help-modal" id="helpModal">
+        <div class="help-modal-content">
+            <button class="help-modal-close" id="helpModalClose">&times;</button>
+            <h2>How can we help?</h2>
+            <p class="help-modal-description">A mail window will open where you can describe your question or report a bug. Your message will be sent to sales.piodeer@gmail.com</p>
+            <div class="help-options">
+                <button class="help-option-btn" id="questionBtn">❓ Ask a Question</button>
+                <button class="help-option-btn" id="bugBtn">🐛 Report a Bug</button>
+            </div>
+        </div>
     </div>
 
     <div class="steps" id="steps-container">
@@ -490,21 +745,21 @@
 
     <script>
         const config = {
-            title: "Rotating Table Assembly",
+            title: "Orbio - the rotating table",
 steps: [
 {
     isHome: true,
     title: "Welcome",
     image: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/themeimage.jpg",
-    text: "This guide will walk you step-by-step through the assembly of your Rotary Table. Follow each step carefully to ensure smooth operation and the best visual results.",
+    text: "The all-round solution for creators & makers. This guide will walk you step-by-step through the assembly of your Orbio. Follow each step carefully to ensure smooth operation and the best visual results.",
     guide: true
 },
 
 {
-    title: "Step 1: Check Inventory",
+    title: "Step 1: Check Inventory (Orbio)",
     sections: [
         { type: "title", text: "Step 1: Check Inventory" },
-        { type: "text", text: "Unbox all parts and verify that everything listed below is included and undamaged." },
+        { type: "text", text: "Unbox all parts of your Orbio and verify that everything listed below is included and undamaged." },
         {
             type: "list",
             items: [
@@ -536,12 +791,12 @@ steps: [
 },
 
 {
-    title: "Step 2: Print all Parts",
+    title: "Step 2: Print all Parts (Orbio)",
     sections: [
         { type: "title", text: "Step 2: Print all Parts" },
         { type: "image", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/parts.jpg" },
         { type: "video", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/insertcable.mp4" },
-        { type: "text", text: "Print all required parts. Make sure to add a pause at the end of the connector gap in the base part so the cable can be inserted directly during printing." }
+        { type: "text", text: "Print all required Orbio parts. Make sure to add a pause at the end of the connector gap in the base part so the cable can be inserted directly during printing." }
     ]
 },
 
@@ -650,16 +905,16 @@ steps: [
             items: [
                 { text: "Arduino IDE Download", url: "https://www.arduino.cc/en/software/" },
                 { text: "ESP8266 Board Driver (for Aliexpress D1 Mini)", url: "https://github.com/SHWotever/FakeCH340DriverFixer/releases/tag/1.1" },
-                { text: "Latest Rotary Table Firmware", url: "https://github.com/piodeer/RotaryTable_LEDeffects/tree/main/sketch" }
+                { text: "Latest Orbio Firmware", url: "https://github.com/piodeer/RotaryTable_LEDeffects/tree/main/sketch" }
             ]
         },
         { type: "text", text: "Install the Arduino IDE and add the ESP8266 board package so the D1 Mini can be programmed. If you have some issues, try ask ChatGPT in my case I always solved the problems this way."},
         { type: "image", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/libraries.jpg" },
         { type: "text", text: "In the program you have to adjust you Wifi Name and Password, so the D1 Mini can connect with it. If you use other LEDs you can adjust the LED Count in the blue field."},
         { type: "text", text: "Upload the Rotary Table firmware to the controller." },
-        { type: "text", text: "In the SerialMonitor you should see an IP Address if everything worked fine. Paste this Adress in your browser and you should see the control page for your Rotating Table." },
+        { type: "text", text: "In the SerialMonitor you should see an IP Address if everything worked fine. Paste this Adress in your browser and you should see the control page for your Orbio." },
         { type: "image", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/web.jpg" },
-        { type: "text", text: "The firmware allows full control of the stepper motor speed, rotation movements, LED brightness, colors and animation effects. After setup, the rotary table creates its own WiFi interface so any device in your home network can control the table." }
+        { type: "text", text: "The firmware allows full control of the stepper motor speed, rotation movements, LED brightness, colors and animation effects. After setup, your Orbio creates its own WiFi interface so any device in your home network can control it." }
     ]
 },
 
@@ -688,7 +943,7 @@ steps: [
     title: "Success!",
     // WICHTIG: Nutze /embed/ statt /shorts/
     video: "https://www.youtube.com/embed/-k997PMsLOE", 
-    text: "Assembly complete✅ Your Rotary Table is now ready for its first photo shooting session."
+    text: "Assembly complete✅ Your Orbio is now ready for its first photo shooting session. The all-round solution for creators & makers!"
 }
 ]
 };
@@ -1135,7 +1390,7 @@ if (section?.type === 'video' && section.src) {
                                         </div>
                                     </div>
                                 </div>
-                                <div style="text-align:center; margin-top:12px; font-weight:600; color:#007aff;">
+                                <div style="text-align:center; margin-top:12px; font-weight:600; color:#8B6130;">
                                     ▶ Watch video on YouTube
                                 </div>
                             </a>`;
@@ -1169,10 +1424,32 @@ if (section?.type === 'video' && section.src) {
             dotsContainer.appendChild(dot);
         });
 
+        function updateSidePanel(index) {
+            // Update active state in chapter list
+            document.querySelectorAll('.side-panel-item').forEach((item, i) => {
+                item.classList.toggle('active', i === index);
+            });
+        }
+
+        function populateChapterList() {
+            const chapterList = document.getElementById('chapterList');
+            config.steps.forEach((step, index) => {
+                const chapterItem = document.createElement('div');
+                chapterItem.className = 'side-panel-item';
+                chapterItem.textContent = step.title || 'Step ' + (index + 1);
+                chapterItem.addEventListener('click', () => {
+                    container.scrollTo({ left: index * window.innerWidth, behavior: 'smooth' });
+                });
+                if (index === 0) chapterItem.classList.add('active');
+                chapterList.appendChild(chapterItem);
+            });
+        }
+
         function handleScroll() {
             const index = Math.round(container.scrollLeft / window.innerWidth);
             document.querySelectorAll('.dot').forEach((dot, i) => dot.classList.toggle('active', i === index));
             prevBtn.disabled = index <= 0;
+            updateSidePanel(index);
 
             if (index >= config.steps.length - 1) {
                 nextBtnLabel.textContent = 'Back to start';
@@ -1215,6 +1492,7 @@ if (section?.type === 'video' && section.src) {
         window.addEventListener('resize', updateViewportVars);
         updateViewportVars();
         handleScroll();
+        populateChapterList();
 
         // Lightbox / image preview
         const lightbox = document.getElementById('lightbox');
@@ -1242,6 +1520,60 @@ if (section?.type === 'video' && section.src) {
             const src = img.getAttribute('src');
             if (!src) return;
             openLightbox(src);
+        });
+
+        // Help Modal Functionality - wrapped in DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const helpButton = document.getElementById('helpButton');
+            const helpModal = document.getElementById('helpModal');
+            const helpModalClose = document.getElementById('helpModalClose');
+            const questionBtn = document.getElementById('questionBtn');
+            const bugBtn = document.getElementById('bugBtn');
+
+            console.log('Help elements found:', {
+                helpButton: !!helpButton,
+                helpModal: !!helpModal,
+                helpModalClose: !!helpModalClose,
+                questionBtn: !!questionBtn,
+                bugBtn: !!bugBtn
+            });
+
+            if (helpButton && helpModal && helpModalClose && questionBtn && bugBtn) {
+                helpButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Help button clicked');
+                    helpModal.classList.add('active');
+                });
+
+                helpModalClose.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    helpModal.classList.remove('active');
+                });
+
+                helpModal.addEventListener('click', function(e) {
+                    if (e.target === helpModal) {
+                        helpModal.classList.remove('active');
+                    }
+                });
+
+                questionBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const subject = encodeURIComponent('Question about Orbio Assembly Guide');
+                    const body = encodeURIComponent('Hi,\n\nI have a question about the Orbio assembly guide:\n\n[Your question here]\n\nThank you!');
+                    window.location.href = `mailto:sales.piodeer@gmail.com?subject=${subject}&body=${body}`;
+                    helpModal.classList.remove('active');
+                });
+
+                bugBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const subject = encodeURIComponent('Bug Report - Orbio Assembly Guide');
+                    const body = encodeURIComponent('Hi,\n\nI found a bug in the Orbio assembly guide:\n\n[Describe the bug here]\n\nSteps to reproduce:\n1. [Step 1]\n2. [Step 2]\n3. [Step 3]\n\nExpected result: [What should happen]\n\nActual result: [What actually happens]\n\nThank you!');
+                    window.location.href = `mailto:sales.piodeer@gmail.com?subject=${subject}&body=${body}`;
+                    helpModal.classList.remove('active');
+                });
+            }
         });
 
         // initial totals after first render
