@@ -115,6 +115,11 @@
             display: none;
         }
         .text { font-size: 16px; line-height: 1.5; color: rgba(107, 79, 58, 0.8); }
+        .text a{
+            color: #8B6130;
+            font-weight: 700;
+            text-decoration: underline;
+        }
         
         /* --- UI ELEMENTS --- */
         .nav-guide { display: flex; justify-content: space-around; margin-top: 20px; padding: 15px; background: rgba(107, 79, 58, 0.08); border-radius: 18px; font-size: 13px; font-weight: 500; border: 1px solid rgba(107, 79, 58, 0.12); }
@@ -813,6 +818,7 @@ steps: [
     title: "Step 4: Solder the parts onto the PCB",
     sections: [
         { type: "title", text: "Step 4: Solder the parts onto the PCB" },
+        { type: "text", text: "In <a href=\"#step-14\">Step 14</a>, creators with the Merchant Kit can find how to import the PCB project into EasyEDA. If you have the Pro Builder Kit, you can upload the Gerber ZIP file to a manufacturer like JLCPCB or PCBWay and order the PCB yourself.<br><br><img src=\"jlcpcb.png\" alt=\"JLCPCB upload example\" style=\"width:100%; border-radius:20px; display:block;\">" },
         { type: "image", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/soldering.jpg" },
         {
             type: "list",
@@ -936,6 +942,28 @@ steps: [
         { type: "video", src: "https://raw.githubusercontent.com/piodeer/RotaryTable_LEDeffects/main/files/images/plate1.mp4" },
         { type: "text", text: "Press the rotation plate onto the rotating adapter until the steel ball plungers snap into place." },
         { type: "text", text: "Once installed, the rotating table is fully assembled and ready for product photography." }
+    ]
+},
+
+{
+    title: "Step 14: Import PCB to EasyEDA",
+    sections: [
+        { type: "title", text: "Step 14: Import PCB to EasyEDA" },
+        { type: "text", text: "This section is only relevant for creators who purchased the Merchant Kit, because only that package includes the editable EasyEDA project files." },
+        { type: "image", src: "easyeda import.png" },
+        { type: "text", text: "Step 1: In EasyEDA, choose Import and select EasyEDA (Professional)." },
+        { type: "image", src: "folder.png" },
+        { type: "text", text: "Step 2: Extract the ZIP file and open the .epro file (for example: Orbio_PCB_V1.epro)." },
+        { type: "image", src: "folderinhalt.png" },
+        { type: "text", text: "Step 3a: If prompted for a password, open the extracted folder content to find the password file." },
+        { type: "image", src: "passwordprotection.png" },
+        { type: "text", text: "Step 3b: Enter the password from password.txt in EasyEDA and confirm." },
+        { type: "image", src: "import.png" },
+        { type: "text", text: "Step 4a: Save the imported file." },
+        { type: "image", src: "opend.png" },
+        { type: "text", text: "Step 4b: Open the project in EasyEDA to edit the schematic or PCB layout." },
+        { type: "image", src: "opend3d.png" },
+        { type: "text", text: "Step 4c: Optionally open the 3D view to verify the board and component placement." }
     ]
 },
 
@@ -1199,9 +1227,16 @@ steps: [
             return out;
         }
 
+        function getStepDomId(step, index){
+            if (step?.isHome) return 'step-home';
+            const no = getStepNumber(step, index + 1);
+            return `step-${no}`;
+        }
+
         config.steps.forEach((step, i) => {
             const stepElement = document.createElement('div');
             stepElement.className = 'step';
+            stepElement.id = getStepDomId(step, i);
             
             let html = `<div class="step-scroll"><div class="step-content">`;
             
@@ -1576,8 +1611,31 @@ if (section?.type === 'video' && section.src) {
             }
         });
 
+        // Hash navigation for direct step links (e.g. #step-14)
+        function scrollToHash(){
+            const hash = window.location.hash;
+            if (!hash || !hash.startsWith('#step-')) return;
+            const el = document.querySelector(hash);
+            if (!el) return;
+            container.scrollTo({ left: el.offsetLeft, behavior: 'smooth' });
+        }
+        window.addEventListener('hashchange', scrollToHash);
+        document.addEventListener('click', (e) => {
+            const a = e.target?.closest?.('a[href^="#step-"]');
+            if (!a) return;
+            e.preventDefault();
+            const href = a.getAttribute('href') || '';
+            if (!href.startsWith('#step-')) return;
+            const el = document.querySelector(href);
+            if (!el) return;
+            history.pushState(null, '', href);
+            container.scrollTo({ left: el.offsetLeft, behavior: 'smooth' });
+        });
+
         // initial totals after first render
         updateTotals();
+        // allow deep-linking after initial render
+        scrollToHash();
     </script>
 </body>
 </html>
